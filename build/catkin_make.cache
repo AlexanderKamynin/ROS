@@ -1,0 +1,2 @@
+talkers
+-DCATKIN_DEVEL_PREFIX=/home/alexander/workspace/devel -DCMAKE_INSTALL_PREFIX=/home/alexander/workspace/install -G Unix Makefiles

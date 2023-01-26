@@ -1,0 +1,8 @@
+prefix=/home/alexander/workspace/install
+
+Name: talkers
+Description: Description of talkers
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
