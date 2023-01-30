@@ -8,6 +8,8 @@
 
 # modified environment variables
 export CMAKE_PREFIX_PATH="/home/alexander/workspace/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/alexander/workspace/devel/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/alexander/workspace/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD='/home/alexander/workspace/build'
 export ROSLISP_PACKAGE_DIRECTORIES='/home/alexander/workspace/devel/share/common-lisp'
 export ROS_PACKAGE_PATH="/home/alexander/workspace/src:$ROS_PACKAGE_PATH"
