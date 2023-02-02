@@ -133,6 +133,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(server src/subscriber.cpp)
+ add_executable(client src/publisher.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -148,6 +149,10 @@ include_directories(
  target_link_libraries(server
    ${catkin_LIBRARIES}
  )
+
+ target_link_libraries(client
+ ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
