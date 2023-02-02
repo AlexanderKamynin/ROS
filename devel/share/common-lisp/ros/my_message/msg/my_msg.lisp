@@ -44,11 +44,15 @@
     (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
-  (cl:map cl:nil #'(cl:lambda (ele) (cl:let* ((signed ele) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:let* ((signed ele) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 18446744073709551616) signed)))
     (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) unsigned) ostream)
     ))
    (cl:slot-value msg 'a))
 )
@@ -68,7 +72,11 @@
       (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:aref vals i) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296)))))))
+      (cl:setf (cl:ldb (cl:byte 8 32) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:aref vals i) (cl:if (cl:< unsigned 9223372036854775808) unsigned (cl:- unsigned 18446744073709551616)))))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<my_msg>)))
@@ -79,20 +87,20 @@
   "my_message/my_msg")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<my_msg>)))
   "Returns md5sum for a message object of type '<my_msg>"
-  "4d4c2dfb91017c753e032c2528ca3891")
+  "01bd265c1d029ea218ce44ea3c9c2cad")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'my_msg)))
   "Returns md5sum for a message object of type 'my_msg"
-  "4d4c2dfb91017c753e032c2528ca3891")
+  "01bd265c1d029ea218ce44ea3c9c2cad")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<my_msg>)))
   "Returns full string definition for message of type '<my_msg>"
-  (cl:format cl:nil "char c~%int32[] a~%~%"))
+  (cl:format cl:nil "char c~%int64[] a~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'my_msg)))
   "Returns full string definition for message of type 'my_msg"
-  (cl:format cl:nil "char c~%int32[] a~%~%"))
+  (cl:format cl:nil "char c~%int64[] a~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <my_msg>))
   (cl:+ 0
      1
-     4 (cl:reduce #'cl:+ (cl:slot-value msg 'a) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'a) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <my_msg>))
   "Converts a ROS message object to a list"

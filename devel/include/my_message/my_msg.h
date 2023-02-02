@@ -38,7 +38,7 @@ struct my_msg_
    typedef uint8_t _c_type;
   _c_type c;
 
-   typedef std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> _a_type;
+   typedef std::vector<int64_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int64_t>> _a_type;
   _a_type a;
 
 
@@ -128,12 +128,12 @@ struct MD5Sum< ::my_message::my_msg_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "4d4c2dfb91017c753e032c2528ca3891";
+    return "01bd265c1d029ea218ce44ea3c9c2cad";
   }
 
   static const char* value(const ::my_message::my_msg_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x4d4c2dfb91017c75ULL;
-  static const uint64_t static_value2 = 0x3e032c2528ca3891ULL;
+  static const uint64_t static_value1 = 0x01bd265c1d029ea2ULL;
+  static const uint64_t static_value2 = 0x18ce44ea3c9c2cadULL;
 };
 
 template<class ContainerAllocator>
@@ -153,7 +153,7 @@ struct Definition< ::my_message::my_msg_<ContainerAllocator> >
   static const char* value()
   {
     return "char c\n"
-"int32[] a\n"
+"int64[] a\n"
 ;
   }
 
@@ -198,7 +198,7 @@ struct Printer< ::my_message::my_msg_<ContainerAllocator> >
     for (size_t i = 0; i < v.a.size(); ++i)
     {
       s << indent << "  a[" << i << "]: ";
-      Printer<int32_t>::stream(s, indent + "  ", v.a[i]);
+      Printer<int64_t>::stream(s, indent + "  ", v.a[i]);
     }
   }
 };

@@ -8,13 +8,13 @@ import struct
 
 
 class my_msg(genpy.Message):
-  _md5sum = "4d4c2dfb91017c753e032c2528ca3891"
+  _md5sum = "01bd265c1d029ea218ce44ea3c9c2cad"
   _type = "my_message/my_msg"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """char c
-int32[] a"""
+int64[] a"""
   __slots__ = ['c','a']
-  _slot_types = ['char','int32[]']
+  _slot_types = ['char','int64[]']
 
   def __init__(self, *args, **kwds):
     """
@@ -57,7 +57,7 @@ int32[] a"""
       buff.write(_get_struct_B().pack(_x))
       length = len(self.a)
       buff.write(_struct_I.pack(length))
-      pattern = '<%si'%length
+      pattern = '<%sq'%length
       buff.write(struct.Struct(pattern).pack(*self.a))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -77,7 +77,7 @@ int32[] a"""
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%si'%length
+      pattern = '<%sq'%length
       start = end
       s = struct.Struct(pattern)
       end += s.size
@@ -98,7 +98,7 @@ int32[] a"""
       buff.write(_get_struct_B().pack(_x))
       length = len(self.a)
       buff.write(_struct_I.pack(length))
-      pattern = '<%si'%length
+      pattern = '<%sq'%length
       buff.write(self.a.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -119,11 +119,11 @@ int32[] a"""
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%si'%length
+      pattern = '<%sq'%length
       start = end
       s = struct.Struct(pattern)
       end += s.size
-      self.a = numpy.frombuffer(str[start:end], dtype=numpy.int32, count=length)
+      self.a = numpy.frombuffer(str[start:end], dtype=numpy.int64, count=length)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill

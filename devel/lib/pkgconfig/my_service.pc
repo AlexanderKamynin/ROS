@@ -1,0 +1,8 @@
+prefix=/home/alexander/workspace/devel
+
+Name: my_service
+Description: Description of my_service
+Version: 0.0.0
+Cflags: -I/home/alexander/workspace/devel/include
+Libs: -L${prefix}/lib 
+Requires: 

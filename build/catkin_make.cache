@@ -1,2 +1,2 @@
-my_message:talkers
+client_server:my_message:my_service:talkers
 -DCATKIN_DEVEL_PREFIX=/home/alexander/workspace/devel -DCMAKE_INSTALL_PREFIX=/home/alexander/workspace/install -G Unix Makefiles

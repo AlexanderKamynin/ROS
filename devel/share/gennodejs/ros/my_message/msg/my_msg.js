@@ -42,7 +42,7 @@ class my_msg {
     // Serialize message field [c]
     bufferOffset = _serializer.char(obj.c, buffer, bufferOffset);
     // Serialize message field [a]
-    bufferOffset = _arraySerializer.int32(obj.a, buffer, bufferOffset, null);
+    bufferOffset = _arraySerializer.int64(obj.a, buffer, bufferOffset, null);
     return bufferOffset;
   }
 
@@ -53,13 +53,13 @@ class my_msg {
     // Deserialize message field [c]
     data.c = _deserializer.char(buffer, bufferOffset);
     // Deserialize message field [a]
-    data.a = _arrayDeserializer.int32(buffer, bufferOffset, null)
+    data.a = _arrayDeserializer.int64(buffer, bufferOffset, null)
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    length += 4 * object.a.length;
+    length += 8 * object.a.length;
     return length + 5;
   }
 
@@ -70,14 +70,14 @@ class my_msg {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '4d4c2dfb91017c753e032c2528ca3891';
+    return '01bd265c1d029ea218ce44ea3c9c2cad';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     char c
-    int32[] a
+    int64[] a
     `;
   }
 
