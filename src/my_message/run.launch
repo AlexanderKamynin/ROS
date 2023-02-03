@@ -1,7 +1,7 @@
 <launch>
     <arg name="stop" default="17"/>
     
-    <node pkg="some_package" type="reader" name="reader" output="screen"/>
+    <node pkg="some_package" type="reader" name="reader" output="screen">
         <remap from="message" to="Name"/>
         <param name="stop_value" type="int" value="$(arg stop)"/>
     </node>
