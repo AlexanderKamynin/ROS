@@ -10,13 +10,13 @@
   ((first
     :reader first
     :initarg :first
-    :type cl:integer
-    :initform 0)
+    :type cl:string
+    :initform "")
    (second
     :reader second
     :initarg :second
-    :type cl:integer
-    :initform 0))
+    :type cl:string
+    :initform ""))
 )
 
 (cl:defclass AddInts-request (<AddInts-request>)
@@ -38,33 +38,37 @@
   (second m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <AddInts-request>) ostream)
   "Serializes a message object of type '<AddInts-request>"
-  (cl:let* ((signed (cl:slot-value msg 'first)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
-    )
-  (cl:let* ((signed (cl:slot-value msg 'second)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
-    )
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'first))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'first))
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'second))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'second))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <AddInts-request>) istream)
   "Deserializes a message object of type '<AddInts-request>"
-    (cl:let ((unsigned 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:slot-value msg 'first) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
-    (cl:let ((unsigned 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:slot-value msg 'second) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'first) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'first) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'second) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'second) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<AddInts-request>)))
@@ -75,20 +79,20 @@
   "my_service/AddIntsRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<AddInts-request>)))
   "Returns md5sum for a message object of type '<AddInts-request>"
-  "85a734c776d49ce7e013b15b395d3f69")
+  "d8ca4ab69fad67fcd8906ca3e09c53af")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'AddInts-request)))
   "Returns md5sum for a message object of type 'AddInts-request"
-  "85a734c776d49ce7e013b15b395d3f69")
+  "d8ca4ab69fad67fcd8906ca3e09c53af")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<AddInts-request>)))
   "Returns full string definition for message of type '<AddInts-request>"
-  (cl:format cl:nil "int32 first~%int32 second~%~%~%"))
+  (cl:format cl:nil "string first~%string second~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'AddInts-request)))
   "Returns full string definition for message of type 'AddInts-request"
-  (cl:format cl:nil "int32 first~%int32 second~%~%~%"))
+  (cl:format cl:nil "string first~%string second~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <AddInts-request>))
   (cl:+ 0
-     4
-     4
+     4 (cl:length (cl:slot-value msg 'first))
+     4 (cl:length (cl:slot-value msg 'second))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <AddInts-request>))
   "Converts a ROS message object to a list"
@@ -102,8 +106,8 @@
   ((sum
     :reader sum
     :initarg :sum
-    :type cl:integer
-    :initform 0))
+    :type cl:string
+    :initform ""))
 )
 
 (cl:defclass AddInts-response (<AddInts-response>)
@@ -120,21 +124,23 @@
   (sum m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <AddInts-response>) ostream)
   "Serializes a message object of type '<AddInts-response>"
-  (cl:let* ((signed (cl:slot-value msg 'sum)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
-    )
+  (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'sum))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_str_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_str_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (c) (cl:write-byte (cl:char-code c) ostream)) (cl:slot-value msg 'sum))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <AddInts-response>) istream)
   "Deserializes a message object of type '<AddInts-response>"
-    (cl:let ((unsigned 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:slot-value msg 'sum) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
+    (cl:let ((__ros_str_len 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) __ros_str_len) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'sum) (cl:make-string __ros_str_len))
+      (cl:dotimes (__ros_str_idx __ros_str_len msg)
+        (cl:setf (cl:char (cl:slot-value msg 'sum) __ros_str_idx) (cl:code-char (cl:read-byte istream)))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<AddInts-response>)))
@@ -145,19 +151,19 @@
   "my_service/AddIntsResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<AddInts-response>)))
   "Returns md5sum for a message object of type '<AddInts-response>"
-  "85a734c776d49ce7e013b15b395d3f69")
+  "d8ca4ab69fad67fcd8906ca3e09c53af")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'AddInts-response)))
   "Returns md5sum for a message object of type 'AddInts-response"
-  "85a734c776d49ce7e013b15b395d3f69")
+  "d8ca4ab69fad67fcd8906ca3e09c53af")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<AddInts-response>)))
   "Returns full string definition for message of type '<AddInts-response>"
-  (cl:format cl:nil "int32 sum~%~%~%"))
+  (cl:format cl:nil "string sum~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'AddInts-response)))
   "Returns full string definition for message of type 'AddInts-response"
-  (cl:format cl:nil "int32 sum~%~%~%"))
+  (cl:format cl:nil "string sum~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <AddInts-response>))
   (cl:+ 0
-     4
+     4 (cl:length (cl:slot-value msg 'sum))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <AddInts-response>))
   "Converts a ROS message object to a list"

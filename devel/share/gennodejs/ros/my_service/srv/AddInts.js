@@ -29,13 +29,13 @@ class AddIntsRequest {
         this.first = initObj.first
       }
       else {
-        this.first = 0;
+        this.first = '';
       }
       if (initObj.hasOwnProperty('second')) {
         this.second = initObj.second
       }
       else {
-        this.second = 0;
+        this.second = '';
       }
     }
   }
@@ -43,9 +43,9 @@ class AddIntsRequest {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type AddIntsRequest
     // Serialize message field [first]
-    bufferOffset = _serializer.int32(obj.first, buffer, bufferOffset);
+    bufferOffset = _serializer.string(obj.first, buffer, bufferOffset);
     // Serialize message field [second]
-    bufferOffset = _serializer.int32(obj.second, buffer, bufferOffset);
+    bufferOffset = _serializer.string(obj.second, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -54,14 +54,17 @@ class AddIntsRequest {
     let len;
     let data = new AddIntsRequest(null);
     // Deserialize message field [first]
-    data.first = _deserializer.int32(buffer, bufferOffset);
+    data.first = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [second]
-    data.second = _deserializer.int32(buffer, bufferOffset);
+    data.second = _deserializer.string(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 8;
+    let length = 0;
+    length += _getByteLength(object.first);
+    length += _getByteLength(object.second);
+    return length + 8;
   }
 
   static datatype() {
@@ -71,14 +74,14 @@ class AddIntsRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '05577f62131ad26921bff0de6b2cb722';
+    return 'c0d0db6e21f3fc1eb068f9cc22ba8beb';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int32 first
-    int32 second
+    string first
+    string second
     
     `;
   }
@@ -93,14 +96,14 @@ class AddIntsRequest {
       resolved.first = msg.first;
     }
     else {
-      resolved.first = 0
+      resolved.first = ''
     }
 
     if (msg.second !== undefined) {
       resolved.second = msg.second;
     }
     else {
-      resolved.second = 0
+      resolved.second = ''
     }
 
     return resolved;
@@ -118,7 +121,7 @@ class AddIntsResponse {
         this.sum = initObj.sum
       }
       else {
-        this.sum = 0;
+        this.sum = '';
       }
     }
   }
@@ -126,7 +129,7 @@ class AddIntsResponse {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type AddIntsResponse
     // Serialize message field [sum]
-    bufferOffset = _serializer.int32(obj.sum, buffer, bufferOffset);
+    bufferOffset = _serializer.string(obj.sum, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -135,12 +138,14 @@ class AddIntsResponse {
     let len;
     let data = new AddIntsResponse(null);
     // Deserialize message field [sum]
-    data.sum = _deserializer.int32(buffer, bufferOffset);
+    data.sum = _deserializer.string(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 4;
+    let length = 0;
+    length += _getByteLength(object.sum);
+    return length + 4;
   }
 
   static datatype() {
@@ -150,13 +155,13 @@ class AddIntsResponse {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '0ba699c25c9418c0366f3595c0c8e8ec';
+    return '3c5c2c5628b5ddd7119bd2a006302ca9';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int32 sum
+    string sum
     
     `;
   }
@@ -171,7 +176,7 @@ class AddIntsResponse {
       resolved.sum = msg.sum;
     }
     else {
-      resolved.sum = 0
+      resolved.sum = ''
     }
 
     return resolved;
@@ -181,6 +186,6 @@ class AddIntsResponse {
 module.exports = {
   Request: AddIntsRequest,
   Response: AddIntsResponse,
-  md5sum() { return '85a734c776d49ce7e013b15b395d3f69'; },
+  md5sum() { return 'd8ca4ab69fad67fcd8906ca3e09c53af'; },
   datatype() { return 'my_service/AddInts'; }
 };

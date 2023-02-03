@@ -1,4 +1,4 @@
-int32 first
-int32 second
+string first
+string second
 ---
-int32 sum
+string sum

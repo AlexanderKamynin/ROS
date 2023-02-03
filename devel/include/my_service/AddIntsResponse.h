@@ -24,16 +24,16 @@ struct AddIntsResponse_
   typedef AddIntsResponse_<ContainerAllocator> Type;
 
   AddIntsResponse_()
-    : sum(0)  {
+    : sum()  {
     }
   AddIntsResponse_(const ContainerAllocator& _alloc)
-    : sum(0)  {
+    : sum(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef int32_t _sum_type;
+   typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _sum_type;
   _sum_type sum;
 
 
@@ -98,12 +98,12 @@ struct IsMessage< ::my_service::AddIntsResponse_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::my_service::AddIntsResponse_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::my_service::AddIntsResponse_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -122,12 +122,12 @@ struct MD5Sum< ::my_service::AddIntsResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "0ba699c25c9418c0366f3595c0c8e8ec";
+    return "3c5c2c5628b5ddd7119bd2a006302ca9";
   }
 
   static const char* value(const ::my_service::AddIntsResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x0ba699c25c9418c0ULL;
-  static const uint64_t static_value2 = 0x366f3595c0c8e8ecULL;
+  static const uint64_t static_value1 = 0x3c5c2c5628b5ddd7ULL;
+  static const uint64_t static_value2 = 0x119bd2a006302ca9ULL;
 };
 
 template<class ContainerAllocator>
@@ -146,7 +146,7 @@ struct Definition< ::my_service::AddIntsResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int32 sum\n"
+    return "string sum\n"
 ;
   }
 
@@ -185,7 +185,7 @@ struct Printer< ::my_service::AddIntsResponse_<ContainerAllocator> >
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::my_service::AddIntsResponse_<ContainerAllocator>& v)
   {
     s << indent << "sum: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.sum);
+    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.sum);
   }
 };
 

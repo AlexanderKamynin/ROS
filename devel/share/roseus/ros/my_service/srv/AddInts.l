@@ -25,12 +25,12 @@
 (defmethod my_service::AddIntsRequest
   (:init
    (&key
-    ((:first __first) 0)
-    ((:second __second) 0)
+    ((:first __first) "")
+    ((:second __second) "")
     )
    (send-super :init)
-   (setq _first (round __first))
-   (setq _second (round __second))
+   (setq _first (string __first))
+   (setq _second (string __second))
    self)
   (:first
    (&optional __first)
@@ -41,27 +41,27 @@
   (:serialization-length
    ()
    (+
-    ;; int32 _first
-    4
-    ;; int32 _second
-    4
+    ;; string _first
+    4 (length _first)
+    ;; string _second
+    4 (length _second)
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int32 _first
-       (write-long _first s)
-     ;; int32 _second
-       (write-long _second s)
+     ;; string _first
+       (write-long (length _first) s) (princ _first s)
+     ;; string _second
+       (write-long (length _second) s) (princ _second s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int32 _first
-     (setq _first (sys::peek buf ptr- :integer)) (incf ptr- 4)
-   ;; int32 _second
-     (setq _second (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; string _first
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _first (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _second
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _second (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;;
    self)
   )
@@ -73,10 +73,10 @@
 (defmethod my_service::AddIntsResponse
   (:init
    (&key
-    ((:sum __sum) 0)
+    ((:sum __sum) "")
     )
    (send-super :init)
-   (setq _sum (round __sum))
+   (setq _sum (string __sum))
    self)
   (:sum
    (&optional __sum)
@@ -84,21 +84,21 @@
   (:serialization-length
    ()
    (+
-    ;; int32 _sum
-    4
+    ;; string _sum
+    4 (length _sum)
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int32 _sum
-       (write-long _sum s)
+     ;; string _sum
+       (write-long (length _sum) s) (princ _sum s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int32 _sum
-     (setq _sum (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; string _sum
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _sum (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;;
    self)
   )
@@ -107,7 +107,7 @@
   :super ros::object
   :slots ())
 
-(setf (get my_service::AddInts :md5sum-) "85a734c776d49ce7e013b15b395d3f69")
+(setf (get my_service::AddInts :md5sum-) "d8ca4ab69fad67fcd8906ca3e09c53af")
 (setf (get my_service::AddInts :datatype-) "my_service/AddInts")
 (setf (get my_service::AddInts :request) my_service::AddIntsRequest)
 (setf (get my_service::AddInts :response) my_service::AddIntsResponse)
@@ -115,26 +115,26 @@
 (defmethod my_service::AddIntsRequest
   (:response () (instance my_service::AddIntsResponse :init)))
 
-(setf (get my_service::AddIntsRequest :md5sum-) "85a734c776d49ce7e013b15b395d3f69")
+(setf (get my_service::AddIntsRequest :md5sum-) "d8ca4ab69fad67fcd8906ca3e09c53af")
 (setf (get my_service::AddIntsRequest :datatype-) "my_service/AddIntsRequest")
 (setf (get my_service::AddIntsRequest :definition-)
-      "int32 first
-int32 second
+      "string first
+string second
 ---
-int32 sum
+string sum
 ")
 
-(setf (get my_service::AddIntsResponse :md5sum-) "85a734c776d49ce7e013b15b395d3f69")
+(setf (get my_service::AddIntsResponse :md5sum-) "d8ca4ab69fad67fcd8906ca3e09c53af")
 (setf (get my_service::AddIntsResponse :datatype-) "my_service/AddIntsResponse")
 (setf (get my_service::AddIntsResponse :definition-)
-      "int32 first
-int32 second
+      "string first
+string second
 ---
-int32 sum
+string sum
 ")
 
 
 
-(provide :my_service/AddInts "85a734c776d49ce7e013b15b395d3f69")
+(provide :my_service/AddInts "d8ca4ab69fad67fcd8906ca3e09c53af")
 
 

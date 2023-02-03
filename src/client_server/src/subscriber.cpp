@@ -5,8 +5,8 @@
 bool add(my_service::AddInts::Request &req, my_service::AddInts::Response &res){
     //запрос - ответ
     res.sum = req.first + req.second;
-    ROS_INFO("request: x=%d, y=%d", req.first, req.second);
-    ROS_INFO("sending back response:[%d]", res.sum);
+    ROS_INFO("request: ");
+    ROS_INFO("sending back response:");
     return true;
 }
 

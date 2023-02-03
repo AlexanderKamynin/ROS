@@ -57,6 +57,7 @@ all: gtest/all
 all: my_message/all
 all: my_service/all
 all: client_server/all
+all: rviz_manip/all
 all: talkers/all
 
 .PHONY : all
@@ -66,6 +67,7 @@ preinstall: gtest/preinstall
 preinstall: my_message/preinstall
 preinstall: my_service/preinstall
 preinstall: client_server/preinstall
+preinstall: rviz_manip/preinstall
 preinstall: talkers/preinstall
 
 .PHONY : preinstall
@@ -80,6 +82,7 @@ clean: gtest/clean
 clean: my_message/clean
 clean: my_service/clean
 clean: client_server/clean
+clean: rviz_manip/clean
 clean: talkers/clean
 
 .PHONY : clean
@@ -234,6 +237,26 @@ my_service/clean: my_service/CMakeFiles/my_service_generate_messages_lisp.dir/cl
 my_service/clean: my_service/CMakeFiles/my_service_gennodejs.dir/clean
 
 .PHONY : my_service/clean
+
+#=============================================================================
+# Directory level rules for directory rviz_manip
+
+# Recursive "all" directory target.
+rviz_manip/all: rviz_manip/CMakeFiles/publish_set.dir/all
+rviz_manip/all: rviz_manip/CMakeFiles/publish_point.dir/all
+
+.PHONY : rviz_manip/all
+
+# Recursive "preinstall" directory target.
+rviz_manip/preinstall:
+
+.PHONY : rviz_manip/preinstall
+
+# Recursive "clean" directory target.
+rviz_manip/clean: rviz_manip/CMakeFiles/publish_set.dir/clean
+rviz_manip/clean: rviz_manip/CMakeFiles/publish_point.dir/clean
+
+.PHONY : rviz_manip/clean
 
 #=============================================================================
 # Directory level rules for directory talkers
@@ -1631,7 +1654,7 @@ client_server/CMakeFiles/roscpp_generate_messages_cpp.dir/clean:
 client_server/CMakeFiles/server.dir/all:
 	$(MAKE) -f client_server/CMakeFiles/server.dir/build.make client_server/CMakeFiles/server.dir/depend
 	$(MAKE) -f client_server/CMakeFiles/server.dir/build.make client_server/CMakeFiles/server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alexander/workspace/build/CMakeFiles --progress-num=27,28 "Built target server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alexander/workspace/build/CMakeFiles --progress-num=31,32 "Built target server"
 .PHONY : client_server/CMakeFiles/server.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1652,13 +1675,67 @@ client_server/CMakeFiles/server.dir/clean:
 .PHONY : client_server/CMakeFiles/server.dir/clean
 
 #=============================================================================
+# Target rules for target rviz_manip/CMakeFiles/publish_set.dir
+
+# All Build rule for target.
+rviz_manip/CMakeFiles/publish_set.dir/all:
+	$(MAKE) -f rviz_manip/CMakeFiles/publish_set.dir/build.make rviz_manip/CMakeFiles/publish_set.dir/depend
+	$(MAKE) -f rviz_manip/CMakeFiles/publish_set.dir/build.make rviz_manip/CMakeFiles/publish_set.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alexander/workspace/build/CMakeFiles --progress-num=27,28 "Built target publish_set"
+.PHONY : rviz_manip/CMakeFiles/publish_set.dir/all
+
+# Build rule for subdir invocation for target.
+rviz_manip/CMakeFiles/publish_set.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alexander/workspace/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 rviz_manip/CMakeFiles/publish_set.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alexander/workspace/build/CMakeFiles 0
+.PHONY : rviz_manip/CMakeFiles/publish_set.dir/rule
+
+# Convenience name for target.
+publish_set: rviz_manip/CMakeFiles/publish_set.dir/rule
+
+.PHONY : publish_set
+
+# clean rule for target.
+rviz_manip/CMakeFiles/publish_set.dir/clean:
+	$(MAKE) -f rviz_manip/CMakeFiles/publish_set.dir/build.make rviz_manip/CMakeFiles/publish_set.dir/clean
+.PHONY : rviz_manip/CMakeFiles/publish_set.dir/clean
+
+#=============================================================================
+# Target rules for target rviz_manip/CMakeFiles/publish_point.dir
+
+# All Build rule for target.
+rviz_manip/CMakeFiles/publish_point.dir/all:
+	$(MAKE) -f rviz_manip/CMakeFiles/publish_point.dir/build.make rviz_manip/CMakeFiles/publish_point.dir/depend
+	$(MAKE) -f rviz_manip/CMakeFiles/publish_point.dir/build.make rviz_manip/CMakeFiles/publish_point.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alexander/workspace/build/CMakeFiles --progress-num=25,26 "Built target publish_point"
+.PHONY : rviz_manip/CMakeFiles/publish_point.dir/all
+
+# Build rule for subdir invocation for target.
+rviz_manip/CMakeFiles/publish_point.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alexander/workspace/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 rviz_manip/CMakeFiles/publish_point.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alexander/workspace/build/CMakeFiles 0
+.PHONY : rviz_manip/CMakeFiles/publish_point.dir/rule
+
+# Convenience name for target.
+publish_point: rviz_manip/CMakeFiles/publish_point.dir/rule
+
+.PHONY : publish_point
+
+# clean rule for target.
+rviz_manip/CMakeFiles/publish_point.dir/clean:
+	$(MAKE) -f rviz_manip/CMakeFiles/publish_point.dir/build.make rviz_manip/CMakeFiles/publish_point.dir/clean
+.PHONY : rviz_manip/CMakeFiles/publish_point.dir/clean
+
+#=============================================================================
 # Target rules for target talkers/CMakeFiles/subscriber.dir
 
 # All Build rule for target.
 talkers/CMakeFiles/subscriber.dir/all:
 	$(MAKE) -f talkers/CMakeFiles/subscriber.dir/build.make talkers/CMakeFiles/subscriber.dir/depend
 	$(MAKE) -f talkers/CMakeFiles/subscriber.dir/build.make talkers/CMakeFiles/subscriber.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alexander/workspace/build/CMakeFiles --progress-num=29,30 "Built target subscriber"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alexander/workspace/build/CMakeFiles --progress-num=33,34 "Built target subscriber"
 .PHONY : talkers/CMakeFiles/subscriber.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1685,7 +1762,7 @@ talkers/CMakeFiles/subscriber.dir/clean:
 talkers/CMakeFiles/publisher.dir/all:
 	$(MAKE) -f talkers/CMakeFiles/publisher.dir/build.make talkers/CMakeFiles/publisher.dir/depend
 	$(MAKE) -f talkers/CMakeFiles/publisher.dir/build.make talkers/CMakeFiles/publisher.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alexander/workspace/build/CMakeFiles --progress-num=25,26 "Built target publisher"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alexander/workspace/build/CMakeFiles --progress-num=29,30 "Built target publisher"
 .PHONY : talkers/CMakeFiles/publisher.dir/all
 
 # Build rule for subdir invocation for target.

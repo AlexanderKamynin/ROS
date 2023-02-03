@@ -25,6 +25,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "my_service/catkin_generated/ordered_paths.cmake"
   "my_service/catkin_generated/package.cmake"
   "my_service/cmake/my_service-genmsg.cmake"
+  "rviz_manip/catkin_generated/ordered_paths.cmake"
+  "rviz_manip/catkin_generated/package.cmake"
   "talkers/catkin_generated/ordered_paths.cmake"
   "talkers/catkin_generated/package.cmake"
   "/home/alexander/workspace/devel/share/my_message/cmake/my_message-msg-paths.cmake"
@@ -39,6 +41,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/alexander/workspace/src/my_message/package.xml"
   "/home/alexander/workspace/src/my_service/CMakeLists.txt"
   "/home/alexander/workspace/src/my_service/package.xml"
+  "/home/alexander/workspace/src/rviz_manip/CMakeLists.txt"
+  "/home/alexander/workspace/src/rviz_manip/package.xml"
   "/home/alexander/workspace/src/talkers/CMakeLists.txt"
   "/home/alexander/workspace/src/talkers/package.xml"
   "/opt/ros/noetic/share/catkin/cmake/all.cmake"
@@ -229,6 +233,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "my_message/CMakeFiles/CMakeDirectoryInformation.cmake"
   "my_service/CMakeFiles/CMakeDirectoryInformation.cmake"
   "client_server/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "rviz_manip/CMakeFiles/CMakeDirectoryInformation.cmake"
   "talkers/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -285,6 +290,8 @@ set(CMAKE_DEPEND_INFO_FILES
   "client_server/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/DependInfo.cmake"
   "client_server/CMakeFiles/roscpp_generate_messages_cpp.dir/DependInfo.cmake"
   "client_server/CMakeFiles/server.dir/DependInfo.cmake"
+  "rviz_manip/CMakeFiles/publish_set.dir/DependInfo.cmake"
+  "rviz_manip/CMakeFiles/publish_point.dir/DependInfo.cmake"
   "talkers/CMakeFiles/subscriber.dir/DependInfo.cmake"
   "talkers/CMakeFiles/publisher.dir/DependInfo.cmake"
   )

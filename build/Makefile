@@ -831,6 +831,32 @@ server/fast:
 .PHONY : server/fast
 
 #=============================================================================
+# Target rules for targets named publish_set
+
+# Build rule for target.
+publish_set: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 publish_set
+.PHONY : publish_set
+
+# fast build rule for target.
+publish_set/fast:
+	$(MAKE) -f rviz_manip/CMakeFiles/publish_set.dir/build.make rviz_manip/CMakeFiles/publish_set.dir/build
+.PHONY : publish_set/fast
+
+#=============================================================================
+# Target rules for targets named publish_point
+
+# Build rule for target.
+publish_point: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 publish_point
+.PHONY : publish_point
+
+# fast build rule for target.
+publish_point/fast:
+	$(MAKE) -f rviz_manip/CMakeFiles/publish_point.dir/build.make rviz_manip/CMakeFiles/publish_point.dir/build
+.PHONY : publish_point/fast
+
+#=============================================================================
 # Target rules for targets named subscriber
 
 # Build rule for target.
@@ -920,6 +946,8 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... server"
+	@echo "... publish_set"
+	@echo "... publish_point"
 	@echo "... subscriber"
 	@echo "... publisher"
 .PHONY : help

@@ -24,21 +24,21 @@ struct AddIntsRequest_
   typedef AddIntsRequest_<ContainerAllocator> Type;
 
   AddIntsRequest_()
-    : first(0)
-    , second(0)  {
+    : first()
+    , second()  {
     }
   AddIntsRequest_(const ContainerAllocator& _alloc)
-    : first(0)
-    , second(0)  {
+    : first(_alloc)
+    , second(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef int32_t _first_type;
+   typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _first_type;
   _first_type first;
 
-   typedef int32_t _second_type;
+   typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _second_type;
   _second_type second;
 
 
@@ -104,12 +104,12 @@ struct IsMessage< ::my_service::AddIntsRequest_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::my_service::AddIntsRequest_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::my_service::AddIntsRequest_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -128,12 +128,12 @@ struct MD5Sum< ::my_service::AddIntsRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "05577f62131ad26921bff0de6b2cb722";
+    return "c0d0db6e21f3fc1eb068f9cc22ba8beb";
   }
 
   static const char* value(const ::my_service::AddIntsRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x05577f62131ad269ULL;
-  static const uint64_t static_value2 = 0x21bff0de6b2cb722ULL;
+  static const uint64_t static_value1 = 0xc0d0db6e21f3fc1eULL;
+  static const uint64_t static_value2 = 0xb068f9cc22ba8bebULL;
 };
 
 template<class ContainerAllocator>
@@ -152,8 +152,8 @@ struct Definition< ::my_service::AddIntsRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int32 first\n"
-"int32 second\n"
+    return "string first\n"
+"string second\n"
 ;
   }
 
@@ -193,9 +193,9 @@ struct Printer< ::my_service::AddIntsRequest_<ContainerAllocator> >
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::my_service::AddIntsRequest_<ContainerAllocator>& v)
   {
     s << indent << "first: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.first);
+    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.first);
     s << indent << "second: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.second);
+    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.second);
   }
 };
 
