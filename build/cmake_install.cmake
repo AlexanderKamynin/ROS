@@ -136,6 +136,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/alexander/workspace/build/client_server/cmake_install.cmake")
   include("/home/alexander/workspace/build/rviz_manip/cmake_install.cmake")
   include("/home/alexander/workspace/build/talkers/cmake_install.cmake")
+  include("/home/alexander/workspace/build/tf_example/cmake_install.cmake")
 
 endif()
 

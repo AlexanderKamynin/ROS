@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/alexander/workspace/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/alexander/workspace/src/client_server/include/**",
+        "/home/alexander/workspace/src/rviz_manip/include/**",
+        "/home/alexander/workspace/src/talkers/include/**",
+        "/home/alexander/workspace/src/tf_example/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

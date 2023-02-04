@@ -1,3 +1,8 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/src/rviz_manip"
+    "cmake.sourceDirectory": "${workspaceFolder}/src/rviz_manip",
+    "python.autoComplete.extraPaths": [
+        "/home/alexander/workspace/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "C_Cpp.errorSquiggles": "disabled"
 }
